@@ -22,6 +22,8 @@ class Parameters:
     filelength = 500
     starttime=0
     endtime=90
+    starttime2=0
+    endtime2=90
     
     def get_starttime(self):
         
@@ -30,6 +32,14 @@ class Parameters:
     def set_starttime(self, start):
         
         Parameters.starttime=start
+        
+    def get_starttime2(self):
+        
+        return Parameters.starttime2
+    
+    def set_starttime2(self, start2):
+        
+        Parameters.starttime2=start2
     
     def get_endtime(self):
         
@@ -38,6 +48,15 @@ class Parameters:
     def set_endtime(self, end):
         
         Parameters.endtime=end
+        
+        
+    def get_endtime2(self):
+        
+        return Parameters.endtime2
+    
+    def set_endtime2(self, end2):
+        
+        Parameters.endtime2=end2
     
     
     def get_filelength(self):
