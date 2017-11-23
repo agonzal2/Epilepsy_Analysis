@@ -37,13 +37,17 @@ def main (): #runs stuff.
     
 init_params()
 
-data=load_file(prm.get_filepath() + prm.get_filename())
+data=load_file(prm.get_filepath() + prm.get_filename()) #######load file
 
-time_axis, sub_data=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
+#plot_all(data, prm.get_sampling_rate()) #######plot all
 
-psd(sub_data, prm.get_windowtype(), prm.get_sampling_rate()) 
 
-#plt.plot(time_axis, sub_data)
+#time_axis, sub_data=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
+#########get sub-data with time
 
-#plt.plot
+psd(sub_data, prm.get_windowtype(), prm.get_sampling_rate()) #########plot psd of subdata 
+
+#plt.plot(time_axis, sub_data) ##########plot sub-data
+
+
 
