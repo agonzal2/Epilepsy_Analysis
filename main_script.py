@@ -8,31 +8,42 @@ email: agonzal2@staffmail.ed.ac.uk
 import glob
 import os
 import parameters
-import load_file
-from matplotlib.pyplot import *
+import matplotlib.pyplot as plt
+from numpy import *
+from initial_processes import *
+from power_spectrum import *
+import scipy.fftpack
+from scipy import signal
 
 prm = parameters.Parameters()
 
 
-def init_params():
-    prm.set_filepath('D:\\ERUK\\Wireless_Opto\\171120_VGATCRE_150_Day_3')
+def init_params(): #Defines initial parameters used throughout.
+    prm.set_filepath('D:\\ERUK\\Wireless_Opto\\171120_VGATCRE_150_Day_3\\')
     prm.set_sampling_rate(512)
     prm.set_filename('vgatcre_150_day3.txt')
-    prm.set_window('hamming')
-    x=prm.get_filename()
-    
-    
-    
+    prm.set_starttime(100)
+    prm.set_endtime(200)
+    prm.set_windowtype('hamming')
+        
 
-def main ():
+def main (): #runs stuff.
     
     init_params()
-    process_files()
+    
+    
+    
     
     
 init_params()
-data=load_file(prm)
 
-plot(data)
+data=load_file(prm.get_filepath() + prm.get_filename())
 
+time_axis, sub_data=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
+
+psd(sub_data, prm.get_windowtype(), prm.get_sampling_rate()) 
+
+#plt.plot(time_axis, sub_data)
+
+#plt.plot
 

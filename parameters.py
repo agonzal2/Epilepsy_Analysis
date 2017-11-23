@@ -18,14 +18,41 @@ class Parameters:
     filepath = ''
     filename = ''
     sampling_rate = 512
-    window =''
+    windowtype =''
+    filelength = 500
+    starttime=0
+    endtime=90
     
-    def get_window(self):
-        return Parameters.window
-    
-    def set_window(self, wd):
+    def get_starttime(self):
         
-        Parameters.window = wd
+        return Parameters.starttime
+    
+    def set_starttime(self, start):
+        
+        Parameters.starttime=start
+    
+    def get_endtime(self):
+        
+        return Parameters.endtime
+    
+    def set_endtime(self, end):
+        
+        Parameters.endtime=end
+    
+    
+    def get_filelength(self):
+        
+        return Parameters.filelength
+    
+    def set_filelength(self, leng):
+        Parameters.filelength=leng
+    
+    def get_windowtype(self):
+        return Parameters.windowtype
+    
+    def set_windowtype(self, wt):
+        
+        Parameters.windowtype = wt
         
     def get_filepath(self):
         return Parameters.filepath
@@ -38,6 +65,9 @@ class Parameters:
 
     def set_filename(self, fn):
         Parameters.filename = fn
+        
+    def get_sampling_rate(self):
+        return Parameters.sampling_rate
                 
     def set_sampling_rate(self, sr):
         
