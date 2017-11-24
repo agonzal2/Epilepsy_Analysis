@@ -17,6 +17,8 @@ class Parameters:
     
     filepath = ''
     filename = ''
+    excelpath = ''
+    excelname = ''
     sampling_rate = 512
     windowtype =''
     filelength = 500
@@ -24,7 +26,19 @@ class Parameters:
     endtime=90
     starttime2=0
     endtime2=90
+ 
+    def get_excelpath(self):
+        return Parameters.excelpath
+
+    def set_excelpath(self, exp):
+        Parameters.excelpath = exp
     
+    def get_excelname(self):
+        return self.excelname
+
+    def set_excelname(self, exn):
+        Parameters.excelname = exn
+        
     def get_starttime(self):
         
         return Parameters.starttime

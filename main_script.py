@@ -20,8 +20,10 @@ prm = parameters.Parameters()
 
 def init_params(): #Defines initial parameters used throughout.
     prm.set_filepath('D:\\ERUK\\Wireless_Opto\\171120_VGATCRE_150_Day_3\\')
-    prm.set_sampling_rate(512)
     prm.set_filename('vgatcre_150_day3.txt')
+    prm.set_excelpath('D:\\ERUK\\Wireless_Opto\\171120_VGATCRE_150_Day_3\\PSD Analysis_black_control_blue_opto\\')
+    prm.set_excelname('171120_VGATCRE_150_Day_3.xls')
+    prm.set_sampling_rate(512)
     prm.set_starttime(1036) #using as experiment
     prm.set_endtime(1046)   
     prm.set_starttime2(994) #using as control.
@@ -35,16 +37,25 @@ def main (): #runs stuff.
     
     
 init_params()
-
 data=load_file(prm.get_filepath() + prm.get_filename()) #######load file
+#plot_all(data, prm.get_sampling_rate()) #######plot all
 
-plot_all(data, prm.get_sampling_rate()) #######plot all
+
+analysis_times=import_spreadsheet(prm.get_excelpath() + prm.get_excelname())
+
+multiple_psds(analysis_times, data)
 
 
-time_axis, sub_data1=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
+
+
+
+
+
+
+#time_axis, sub_data1=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
 #########get sub-data with time
 
-time_axis, sub_data2=sub_time_data(data, prm.get_starttime2(), prm.get_endtime2(), prm.get_sampling_rate())
+#time_axis, sub_data2=sub_time_data(data, prm.get_starttime2(), prm.get_endtime2(), prm.get_sampling_rate())
 
 #psd(sub_data, prm.get_windowtype(), prm.get_sampling_rate()) #########plot psd of subdata 
 
