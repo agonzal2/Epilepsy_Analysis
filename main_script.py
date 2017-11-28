@@ -19,10 +19,10 @@ prm = parameters.Parameters()
 
 
 def init_params(): #Defines initial parameters used throughout.
-    prm.set_filepath('D:\\ERUK\\Wireless_Opto\\171120_VGATCRE_150_Day_3\\')
-    prm.set_filename('vgatcre_150_day3.txt')
-    prm.set_excelpath('D:\\ERUK\\Wireless_Opto\\171120_VGATCRE_150_Day_3\\PSD Analysis_black_control_blue_opto\\')
-    prm.set_excelname('171120_VGATCRE_150_Day_3.xls')
+    prm.set_filepath('E:\\ERUK\Wireless_Opto\\171127_VGATCRE_150_Day_10\\')
+    prm.set_filename('171127_vgatcre_150_day_10.txt')
+    prm.set_excelpath('E:\\ERUK\\Wireless_Opto\\171127_VGATCRE_150_Day_10\\PSD Analysis_black_control_blue_opto\\')
+    prm.set_excelname('171127_VGATCRE_150_Day_10.xls')
     prm.set_sampling_rate(512)
     prm.set_starttime(1036) #using as experiment
     prm.set_endtime(1046)   
@@ -38,12 +38,13 @@ def main (): #runs stuff.
     
 init_params()
 data=load_file(prm.get_filepath() + prm.get_filename()) #######load file
-#plot_all(data, prm.get_sampling_rate()) #######plot all
+plot_all(data, prm.get_sampling_rate()) #######Function to plot the data file.
 
 
-analysis_times=import_spreadsheet(prm.get_excelpath() + prm.get_excelname())
-
-multiple_psds(analysis_times, data)
+#analysis_times=import_spreadsheet(prm.get_excelpath() + prm.get_excelname()) #This together with Excel spreadsheet
+#allows you to analyse specified times in the data.
+#
+#multiple_psds(analysis_times, data) # Function to plot the multiple psds based on import_spreadsheet. 
 
 
 
