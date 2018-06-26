@@ -13,8 +13,9 @@ import xlrd
 
 def load_file(file):  #Opens text files.
     print(" Opening file " + file)
-    data=loadtxt(file)
     
+    data=loadtxt(file)
+    print(len(data))
     return data
 
 
@@ -27,7 +28,7 @@ def import_spreadsheet(excelfile): #Import analysis times for optogenetic on and
     book= xlrd.open_workbook(excelfile)
     sheet_names = book.sheet_names()
     sheet= book.sheet_by_name(sheet_names[0])
-    analysis_times= zeros(shape=(sheet.nrows - 1, 4))
+    analysis_times= zeros(shape=(sheet.nrows - 1, 5))
     
     for n in range(0, sheet.nrows-1):
         cell1=sheet.cell(n+1, 3)
@@ -42,6 +43,9 @@ def import_spreadsheet(excelfile): #Import analysis times for optogenetic on and
         cell6=sheet.cell(n+1, 6)
         cell6_value=cell6.value
         analysis_times[n, 3]=cell6_value
+        cell7=sheet.cell(n+1, 7)
+        cell7_value=cell7.value
+        analysis_times[n, 4]=cell7_value
         
     return analysis_times
 
@@ -60,13 +64,13 @@ def sub_time_data(data, start_time, end_time, sampling_rate): #Gets time axis an
     return time_axis, sub_data
 
 
-def plot_all(data, sampling_rate):  #This allows for an initial plot of all the ddata.
+def plot_all(data, sampling_rate, color):  #This allows for an initial plot of all the ddata.
     
     timemax=len(data)
     timelength = timemax/sampling_rate
     
     timeforplot = linspace(0, timelength, timemax)
-    plt.plot(timeforplot, data)
+    plt.plot(timeforplot, data, color)
     
     return
 

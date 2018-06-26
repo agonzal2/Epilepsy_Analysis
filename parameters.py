@@ -26,6 +26,7 @@ class Parameters:
     endtime=90
     starttime2=0
     endtime2=90
+    stimfreq=10
  
     def get_excelpath(self):
         return Parameters.excelpath
@@ -105,6 +106,13 @@ class Parameters:
     def set_sampling_rate(self, sr):
         
         Parameters.sampling_rate = sr
+        
+    def get_stimfreq(self):
+        return Parameters.stimfreq
+                
+    def set_stimfreq(self, sf):
+        
+        Parameters.stimfreq = sf
     
 
         
