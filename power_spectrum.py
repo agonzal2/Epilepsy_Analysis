@@ -45,7 +45,7 @@ def psd_2chan (sub_data1, sub_data2, windowtype, samplingrate, stimfreq) :  # Ca
     window=scipy.signal.get_window(windowtype, samplingrate)
     f, Pxx_den = signal.periodogram(sub_data1, samplingrate, window, samplingrate)
     psd=plt.semilogy(f, sqrt(Pxx_den), 'b')
-    
+
     window=scipy.signal.get_window(windowtype, samplingrate)
     f, Pxx_den = signal.periodogram(sub_data2, samplingrate, window, samplingrate)
     psd=plt.semilogy(f, sqrt(Pxx_den), 'k')
@@ -71,6 +71,23 @@ def psd_2chan (sub_data1, sub_data2, windowtype, samplingrate, stimfreq) :  # Ca
     plt.close()
     return
 
+def psd_entrainment_data (sub_data1, sub_data2, windowtype, samplingrate, stimfreq) :  # Calculates PSD, plots it, saves it
+    
+    
+
+    window=scipy.signal.get_window(windowtype, samplingrate)
+    f, Pxx_den = signal.periodogram(sub_data1, samplingrate, window, samplingrate)
+    stimpower= Pxx_den[int(stimfreq)]
+    cumulativepower=Pxx_den[0]+Pxx_den[1]+Pxx_den[2]+Pxx_den[3]+Pxx_den[4]+Pxx_den[5]+Pxx_den[6]+Pxx_den[7]+Pxx_den[8]+Pxx_den[9]+Pxx_den[10]+Pxx_den[11]+Pxx_den[12]+Pxx_den[13]+Pxx_den[14]+Pxx_den[15]+Pxx_den[16]+Pxx_den[17]+Pxx_den[18]+Pxx_den[19]+Pxx_den[20]+Pxx_den[21]+Pxx_den[22]
+    entrainmentratio=stimpower/cumulativepower
+    
+
+    
+#    window=scipy.signal.get_window(windowtype, samplingrate)
+#    f, Pxx_den = signal.periodogram(sub_data2, samplingrate, window, samplingrate)
+
+    return entrainmentratio
+    
 def multiple_psds(analysis_times, data): #Plots PSDs at multiple times when fed in an excel spreadsheet.
        
     
@@ -90,13 +107,41 @@ def multiple_psds(analysis_times, data): #Plots PSDs at multiple times when fed 
         time_axis, sub_data1=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
 #########get sub-data with time
 
-
+      
         time_axis, sub_data2=sub_time_data(data, prm.get_starttime2(), prm.get_endtime2(), prm.get_sampling_rate())
 
-       
         psd_2chan(sub_data1, sub_data2, prm.get_windowtype(), prm.get_sampling_rate(), prm.get_stimfreq())
         
-        
-        
-#        print(start_time, end_time, start_time2, end_time2)
+    
+     
+    return
+
+def multiple_entrainmentratio(analysis_times, data): #Plots PSDs at multiple times when fed in an excel spreadsheet.
+       
+    
+    num_rows, num_cols=analysis_times.shape
+    entrainmentresults= zeros([num_rows])
+    for n in range(0, num_rows):
+        start_time=(analysis_times.item(n,0))
+        prm.set_starttime(start_time) #using as experiment
+        end_time=(analysis_times.item(n,1))
+        prm.set_endtime(end_time)   
+        start_time2=(analysis_times.item(n,2))
+        prm.set_starttime2(start_time2) #using as control.
+        end_time2=(analysis_times.item(n,3))
+        prm.set_endtime2(end_time2)
+        stimfreq=(analysis_times.item(n,4))
+        prm.set_stimfreq(stimfreq)
+ 
+        time_axis, sub_data1=sub_time_data(data, prm.get_starttime(), prm.get_endtime(), prm.get_sampling_rate())
+#########get sub-data with time
+
+      
+        time_axis, sub_data2=sub_time_data(data, prm.get_starttime2(), prm.get_endtime2(), prm.get_sampling_rate())
+
+        entrainmentratio = psd_entrainment_data(sub_data1, sub_data2, prm.get_windowtype(), prm.get_sampling_rate(), prm.get_stimfreq())
+        entrainmentresults[n]=entrainmentratio
+        print(entrainmentratio)
+    
+     
     return

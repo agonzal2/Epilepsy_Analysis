@@ -106,7 +106,7 @@ def loadContinuous(filepath, dtype = float):
     assert dtype in (float, np.int16), \
       'Invalid data type specified for loadContinous, valid types are float and np.int16'
 
-    print("Loading continuous data...")
+   # print("Loading continuous data...")
 
     ch = { }
 

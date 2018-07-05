@@ -21,10 +21,10 @@ prm = parameters.Parameters()
 
 
 def init_params(): #Defines initial parameters used throughout.
-    prm.set_filepath('D:\\ERUK\\tethered Recordings\\ERUK Animals\\180621\\2018-06-21_12-02-30\\')
+    prm.set_filepath('D:\\ERUK\\tethered Recordings\\ERUK Animals\\180705\\2018-07-05_10-37-59\\')
     prm.set_filename('E17.txt')
-    prm.set_excelpath('D:\\ERUK\\tethered Recordings\\ERUK Animals\\180621\\2018-06-21_12-02-30\\Results\\')
-    prm.set_excelname('180621_VGATCRE_390.xls')
+    prm.set_excelpath('D:\\ERUK\\tethered Recordings\\ERUK Animals\\180705\\')
+    prm.set_excelname('180705_VGATCRE_390.xls')
     prm.set_sampling_rate(1000)
     prm.set_starttime(1036) #using as experiment
     prm.set_endtime(1046)   
@@ -42,9 +42,9 @@ def main (): #runs stuff.
     
     
 init_params()
-data=loadFolderToArray(prm.get_filepath(), channels = 'all', chprefix = 'CH', dtype = float, session = '0', source = '100')#######load file
-
-data_adc=loadFolderToArray(prm.get_filepath(), channels = 'all', chprefix = 'ADC', dtype = float, session = '0', source = '100')#######load file8
+#data=loadFolderToArray(prm.get_filepath(), channels = 'all', chprefix = 'CH', dtype = float, session = '0', source = '100')#######load file
+##
+#data_adc=loadFolderToArray(prm.get_filepath(), channels = 'all', chprefix = 'ADC', dtype = float, session = '0', source = '100')#######load file8
 
 #data=data[::2] #####These 2 lines let you down sample data and plot it.
 #plot_all(data[:,14], prm.get_sampling_rate(), 'k')
@@ -68,17 +68,19 @@ data_adc=loadFolderToArray(prm.get_filepath(), channels = 'all', chprefix = 'ADC
 
 
 
-analysis_times=import_spreadsheet(prm.get_excelpath() + prm.get_excelname()) #This together with Excel spreadsheet
+#analysis_times=import_spreadsheet(prm.get_excelpath() + prm.get_excelname()) #This together with Excel spreadsheet
 #allows you to analyse specified times in the data.
 #
-#multiple_psds(analysis_times, data[:,8]) # Function to plot the multiple psds based on import_spreadsheet. 
+#multiple_psds(analysis_times, data[:,13]) # Function to plot the multiple psds based on import_spreadsheet. 
+multiple_entrainmentratio(analysis_times, data[:,1])
+#emg=data[:,11]-data[:,10]
+#plot_all(emg, prm.get_sampling_rate(), 'g')
+#plot_all(data[:,3]+1000, prm.get_sampling_rate(), 'g')
+#plot_all(data[:,9]+500, prm.get_sampling_rate(),'y')
+#plot_all(data[:,9], prm.get_sampling_rate(),'r')
+#plot_all(data[:,15], prm.get_sampling_rate(),'k')
 
-#plot_all(data[:,2], prm.get_sampling_rate(), 'g')
-#plot_all(data[:,8], prm.get_sampling_rate(),'y')
-plot_all(data[:,12], prm.get_sampling_rate(),'r')
-#plot_all(data[:,4], prm.get_sampling_rate(),'k')
-
-plot_all(data_adc[:,1]*100+180, prm.get_sampling_rate(), 'b')
+#plot_all(data_adc[:,1]*1000+1000, prm.get_sampling_rate(), 'b')
 
 
 

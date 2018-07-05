@@ -20,9 +20,9 @@ prm = parameters.Parameters()
 
 
 def init_params(): #Defines initial parameters used throughout.
-    prm.set_filepath('D:\\ERUK\\Wireless_Opto\\First attempt\\Chronic epilepsy\\')
-    prm.set_filename('E29.txt')
-    prm.set_excelpath('D:\\ERUK\\Wireless_Opto\\First attempt\\VGATCRE_150\\171221_VGATCRE_150_Day_39\\PSD Analysis_black_control_blue_opto\\')
+    prm.set_filepath('C:\\Users\\agonzal2\\DocSyncUoE\\Important Documents\\VGAT159 Analysis Seizures\\')
+    prm.set_filename('E17.txt')
+    prm.set_excelpath('D:\\ERUK\\Evans Recordings\\180314\\')
     prm.set_excelname('171221_VGATCRE_150_Day_39b.xls')
     prm.set_sampling_rate(512)
     prm.set_starttime(1036) #using as experiment
@@ -41,11 +41,14 @@ init_params()
 data=load_file(prm.get_filepath() + prm.get_filename()) #######load file
 #data=data[::2] #####These 2 lines let you down sample data and plot it.
 #plt.plot(data)
-
-filtered_data=highpass(data, prm.get_sampling_rate)  #### Function to filter data.
-filtered_data2=lowpass(data, prm.get_sampling_rate)
-plot_all((data-44200), prm.get_sampling_rate()) #######Function to plot the data file.
-plot_all(filtered_data, prm.get_sampling_rate()) #######Function to plot filtered data file.
+#prm.set_filename('E9.txt')
+#data2=load_file(prm.get_filepath() + prm.get_filename()) #######load file
+#plt.plot(data2)
+#filtered_data=lowpass(data, prm.get_sampling_rate, 30, 255)  #### Function to filter data.
+#filtered_data2=lowpass(data2, prm.get_sampling_rate, 1, 100)
+plot_all((data)-38000, prm.get_sampling_rate(), 'k') #######Function to plot the data file.
+#plot_all((data2+1000), prm.get_sampling_rate(), 'b')
+#plot_all(filtered_data, prm.get_sampling_rate(), 'b') #######Function to plot filtered data file.
 #plot_all(filtered_data2, prm.get_sampling_rate()) #######Function to plot filtered data file.
 
 
