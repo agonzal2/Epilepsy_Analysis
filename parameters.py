@@ -27,6 +27,9 @@ class Parameters:
     starttime2=0
     endtime2=90
     stimfreq=10
+    
+    def __init__(self): #Think I deleted this, but now it is back.#Check that everything works with thing on board.
+        return
  
     def get_excelpath(self):
         return Parameters.excelpath
